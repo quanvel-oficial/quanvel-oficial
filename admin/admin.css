@@ -197,15 +197,18 @@ body {
   color: #a78bfa;
   text-decoration: none;
   font-size: 0.85rem;
-  font-weight: 500;
-  padding: 8px 14px;
+  font-weight: 600;
+  padding: 10px 14px;
   border-radius: 6px;
   text-align: center;
   transition: 0.2s;
+  background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.15);
 }
 
 .preview-link:hover {
-  background: rgba(124,58,237,0.08);
+  background: rgba(124,58,237,0.15);
+  color: #c4b5fd;
 }
 
 .logout-btn {
