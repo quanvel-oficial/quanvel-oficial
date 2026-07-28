@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Quanvely</title>
+  <link rel="stylesheet" href="admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <div class="login-box">
+      <div class="login-logo">Q</div>
+      <h1>Admin Quanvely</h1>
+      <p>Ingresa tu contrasena para administrar la pagina</p>
+      <form id="login-form">
+        <input type="password" id="password-input" placeholder="Contrasena" required>
+        <p id="login-error" class="login-error"></p>
+        <button type="submit">Ingresar</button>
+      </form>
+      <p class="login-hint">Contrasena por defecto: <strong>admin123</strong></p>
+    </div>
+  </div>
+
+  <div id="dashboard" class="dashboard" style="display:none;">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">Q</span>
+        <span>Quanvely Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-tab="general">General</button>
+        <button class="nav-btn" data-tab="hero">Inicio</button>
+        <button class="nav-btn" data-tab="services">Servicios</button>
+        <button class="nav-btn" data-tab="about">Sobre nosotros</button>
+        <button class="nav-btn" data-tab="portfolio">Portfolio</button>
+        <button class="nav-btn" data-tab="testimonials">Testimonios</button>
+        <button class="nav-btn" data-tab="cta">CTA</button>
+        <button class="nav-btn" data-tab="contact">Contacto</button>
+        <button class="nav-btn" data-tab="footer">Footer</button>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="../index.html" target="_blank" class="preview-link">Ver pagina &rarr;</a>
+        <button id="logout-btn" class="logout-btn">Cerrar sesion</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="content-header">
+        <h2 id="tab-title">General</h2>
+        <button id="save-all-btn" class="save-btn">Guardar cambios</button>
+      </header>
+
+      <div class="content-body">
+
+        <!-- GENERAL -->
+        <div id="tab-general" class="tab-content active">
+          <div class="card">
+            <h3>General</h3>
+            <div class="field">
+              <label>Titulo de la pestana (browser tab)</label>
+              <input type="text" id="site-title" data-key="site-title">
+            </div>
+            <div class="field">
+              <label>Texto del logo en navbar y footer</label>
+              <input type="text" id="site-logo-text" data-key="site-logo-text">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Texto boton "Comenzar proyecto"</label>
+                <input type="text" id="hero-btn1" data-key="hero-btn1">
+              </div>
+              <div class="field">
+                <label>Texto boton "Ver servicios"</label>
+                <input type="text" id="hero-btn2" data-key="hero-btn2">
+              </div>
+            </div>
+            <div class="field">
+              <label>Texto label "Proyectos entregados"</label>
+              <input type="text" id="stat-label-projects" data-key="stat-label-projects">
+            </div>
+            <div class="field">
+              <label>Texto label "Clientes satisfechos"</label>
+              <input type="text" id="stat-label-clients" data-key="stat-label-clients">
+            </div>
+            <div class="field">
+              <label>Texto label "         A&ntilde;os de experiencia"</label>
+              <input type="text" id="stat-label-years" data-key="stat-label-years">
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO -->
+        <div id="tab-hero" class="tab-content">
+          <div class="card">
+            <h3>Inicio / Hero</h3>
+            <div class="field">
+              <label>Section tag (texto con bullet verde)</label>
+              <input type="text" id="hero-badge" data-key="hero-badge">
+            </div>
+            <div class="field">
+              <label>Titulo principal</label>
+              <input type="text" id="hero-title" data-key="hero-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para texto con gradiente</small>
+            </div>
+            <div class="field">
+              <label>Descripcion</label>
+              <textarea id="hero-desc" data-key="hero-desc" rows="3"></textarea>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Proyectos (numero)</label>
+                <input type="number" id="hero-projects" data-key="hero-projects">
+              </div>
+              <div class="field">
+                <label>Clientes (numero)</label>
+                <input type="number" id="hero-clients" data-key="hero-clients">
+              </div>
+              <div class="field">
+                <label>A&ntilde;os (numero)</label>
+                <input type="number" id="hero-years" data-key="hero-years">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SERVICES -->
+        <div id="tab-services" class="tab-content">
+          <div class="card">
+            <h3>Servicios</h3>
+            <div class="field">
+              <label>Section tag</label>
+              <input type="text" id="services-tag" data-key="services-tag">
+            </div>
+            <div class="field">
+              <label>Titulo de la seccion</label>
+              <input type="text" id="services-title" data-key="services-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
+            </div>
+            <p class="card-desc" style="margin-top:24px;">Edita cada uno de los 6 servicios</p>
+            <div id="services-list"></div>
+          </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div id="tab-about" class="tab-content">
+          <div class="card">
+            <h3>Sobre nosotros</h3>
+            <div class="field">
+              <label>Section tag</label>
+              <input type="text" id="about-tag" data-key="about-tag">
+            </div>
+            <div class="field">
+              <label>Titulo de la seccion</label>
+              <input type="text" id="about-title" data-key="about-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
+            </div>
+            <div class="field">
+              <label>Texto principal</label>
+              <textarea id="about-text" data-key="about-text" rows="4"></textarea>
+            </div>
+            <div class="field">
+              <label>Feature 1 - Titulo</label>
+              <input type="text" id="about-f1-title" data-key="about-f1-title">
+            </div>
+            <div class="field">
+              <label>Feature 1 - Descripcion</label>
+              <textarea id="about-f1-desc" data-key="about-f1-desc" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Feature 2 - Titulo</label>
+              <input type="text" id="about-f2-title" data-key="about-f2-title">
+            </div>
+            <div class="field">
+              <label>Feature 2 - Descripcion</label>
+              <textarea id="about-f2-desc" data-key="about-f2-desc" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Feature 3 - Titulo</label>
+              <input type="text" id="about-f3-title" data-key="about-f3-title">
+            </div>
+            <div class="field">
+              <label>Feature 3 - Descripcion</label>
+              <textarea id="about-f3-desc" data-key="about-f3-desc" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- PORTFOLIO -->
+        <div id="tab-portfolio" class="tab-content">
+          <div class="card">
+            <h3>Portfolio</h3>
+            <div class="field">
+              <label>Section tag</label>
+              <input type="text" id="portfolio-tag" data-key="portfolio-tag">
+            </div>
+            <div class="field">
+              <label>Titulo de la seccion</label>
+              <input type="text" id="portfolio-title" data-key="portfolio-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
+            </div>
+            <p class="card-desc" style="margin-top:24px;">Edita los 3 proyectos</p>
+            <div id="portfolio-list"></div>
+          </div>
+        </div>
+
+        <!-- TESTIMONIALS -->
+        <div id="tab-testimonials" class="tab-content">
+          <div class="card">
+            <h3>Testimonios</h3>
+            <div class="field">
+              <label>Section tag</label>
+              <input type="text" id="testimonials-tag" data-key="testimonials-tag">
+            </div>
+            <div class="field">
+              <label>Titulo de la seccion</label>
+              <input type="text" id="testimonials-title" data-key="testimonials-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
+            </div>
+            <p class="card-desc" style="margin-top:24px;">Edita los 3 testimonios</p>
+            <div id="testimonials-list"></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div id="tab-cta" class="tab-content">
+          <div class="card">
+            <h3>CTA (Call to Action)</h3>
+            <div class="field">
+              <label>Section tag</label>
+              <input type="text" id="cta-tag" data-key="cta-tag">
+            </div>
+            <div class="field">
+              <label>Titulo</label>
+              <input type="text" id="cta-title" data-key="cta-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
+            </div>
+            <div class="field">
+              <label>Descripcion</label>
+              <textarea id="cta-desc" data-key="cta-desc" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Texto del boton</label>
+              <input type="text" id="cta-btn" data-key="cta-btn">
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div id="tab-contact" class="tab-content">
+          <div class="card">
+            <h3>Contacto</h3>
+            <div class="field">
+              <label>Section tag</label>
+              <input type="text" id="contact-tag" data-key="contact-tag">
+            </div>
+            <div class="field">
+              <label>Titulo de la seccion</label>
+              <input type="text" id="contact-title" data-key="contact-title">
+              <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="text" id="contact-email" data-key="contact-email">
+            </div>
+            <div class="field">
+              <label>Ubicacion</label>
+              <input type="text" id="contact-location" data-key="contact-location">
+            </div>
+            <div class="field">
+              <label>Tiempo de respuesta</label>
+              <input type="text" id="contact-response" data-key="contact-response">
+            </div>
+            <div class="field">
+              <label>Texto del boton del formulario</label>
+              <input type="text" id="contact-submit" data-key="contact-submit">
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div id="tab-footer" class="tab-content">
+          <div class="card">
+            <h3>Footer</h3>
+            <div class="field">
+              <label>Texto de la marca (bajo el logo)</label>
+              <textarea id="footer-text" data-key="footer-text" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Copyright</label>
+              <input type="text" id="footer-copyright" data-key="footer-copyright">
+            </div>
+            <div class="field">
+              <label>Titulo columna "Servicios"</label>
+              <input type="text" id="footer-col1-title" data-key="footer-col1-title">
+            </div>
+            <div class="field">
+              <label>Titulo columna "Empresa"</label>
+              <input type="text" id="footer-col2-title" data-key="footer-col2-title">
+            </div>
+            <div class="field">
+              <label>Titulo columna "Siguenos"</label>
+              <input type="text" id="footer-col3-title" data-key="footer-col3-title">
+            </div>
+            <div class="field">
+              <label>GitHub URL</label>
+              <input type="text" id="footer-github" data-key="footer-github" placeholder="https://github.com/quanvely">
+            </div>
+            <div class="field">
+              <label>LinkedIn URL</label>
+              <input type="text" id="footer-linkedin" data-key="footer-linkedin" placeholder="https://linkedin.com/company/quanvely">
+            </div>
+            <div class="field">
+              <label>Twitter / X URL</label>
+              <input type="text" id="footer-twitter" data-key="footer-twitter" placeholder="https://twitter.com/quanvely">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast">Cambios guardados</div>
+  <script src="admin.js"></script>
+</body>
+</html>
