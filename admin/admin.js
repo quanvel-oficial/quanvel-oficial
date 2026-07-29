@@ -271,11 +271,15 @@ function handleSave() {
   content = collectFields();
   saveContent(content);
   const token = document.getElementById('github-token').value;
-  if (token) localStorage.setItem('quanvely-github-token', token);
-  showToast('Cambios guardados correctamente');
+  if (token) {
+    localStorage.setItem('quanvely-github-token', token);
+    publishToGitHub(true);
+  } else {
+    showToast('Cambios guardados localmente. Ingresa un token en General para publicar en GitHub');
+  }
 }
 
-async function publishToGitHub() {
+async function publishToGitHub(silent) {
   const token = document.getElementById('github-token').value;
   if (!token) {
     showToast('Primero ingresa tu token de GitHub en General');
@@ -314,9 +318,10 @@ async function publishToGitHub() {
       },
       body: JSON.stringify(body)
     });
-    showToast('Publicado en GitHub!');
+    if (!silent) showToast('Publicado en GitHub!');
+    else showToast('Guardado y publicado en GitHub');
   } catch(e) {
-    showToast('Error al publicar: ' + e.message);
+    if (!silent) showToast('Error al publicar: ' + e.message);
   }
 }
 
