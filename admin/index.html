@@ -48,7 +48,10 @@
     <main class="main-content">
       <header class="content-header">
         <h2 id="tab-title">General</h2>
-        <button id="save-all-btn" class="save-btn">Guardar cambios</button>
+        <div class="header-buttons">
+          <button id="publish-btn" class="publish-btn" title="Sube los cambios a GitHub para que se vean en la pagina publica">Publicar cambios</button>
+          <button id="save-all-btn" class="save-btn">Guardar cambios</button>
+        </div>
       </header>
 
       <div class="content-body">
@@ -84,8 +87,16 @@
               <input type="text" id="stat-label-clients" data-key="stat-label-clients">
             </div>
             <div class="field">
-              <label>Texto label "         A&ntilde;os de experiencia"</label>
+              <label>Texto label "Anos de experiencia"</label>
               <input type="text" id="stat-label-years" data-key="stat-label-years">
+            </div>
+            <div class="field-separator"></div>
+            <h4 style="margin-bottom:12px;font-size:0.95rem;">Conexion GitHub (para publicar cambios)</h4>
+            <div class="field">
+              <label>Token de GitHub</label>
+              <input type="password" id="github-token" placeholder="ghp_..."
+ style="font-family:monospace;">
+              <small>Crea tu token en GitHub: Settings > Developer settings > Personal access tokens > Tokens (classic). Marca "repo".</small>
             </div>
           </div>
         </div>
