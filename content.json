@@ -1,0 +1,114 @@
+{
+    "contact-email":  "hola@quanvely.com",
+    "contact-submit":  "Enviar mensaje",
+    "about-f1-title":  "Metodologia Agile",
+    "about-f2-desc":  "Testing automatizado, revision de codigo y mejores practicas en cada linea que escribimos.",
+    "cta-tag":  "Trabajemos juntos",
+    "testimonials":  [
+                         {
+                             "name":  "Carlos Mendoza",
+                             "text":  "Quanvely transformo nuestra plataforma. El resultado supero nuestras expectativas.",
+                             "role":  "CEO, TechStore"
+                         },
+                         {
+                             "name":  "Ana Lucia Perez",
+                             "text":  "Trabajar con Quanvely fue una experiencia increible.",
+                             "role":  "CTO, FinSecure"
+                         },
+                         {
+                             "name":  "Miguel Rojas",
+                             "text":  "Los mejores en desarrollo movil. Sin duda.",
+                             "role":  "Fundador, FitNow"
+                         }
+                     ],
+    "site-logo-text":  "Quanvely",
+    "about-tag":  "Sobre nosotros",
+    "hero-btn2":  "Ver servicios",
+    "footer-col2-title":  "Empresa",
+    "portfolio":  [
+                      {
+                          "title":  "Marketplace Digital",
+                          "desc":  "Plataforma de comercio electronico con mas de 10,000 productos.",
+                          "type":  "E-commerce"
+                      },
+                      {
+                          "title":  "Dashboard Analytics",
+                          "desc":  "Sistema de analisis de datos en tiempo real.",
+                          "type":  "SaaS"
+                      },
+                      {
+                          "title":  "App de Fitness",
+                          "desc":  "Aplicacion movil con 50k+ descargas.",
+                          "type":  "Mobile App"
+                      }
+                  ],
+    "cta-btn":  "Solicitar cotizacion \u0026rarr;",
+    "services-title":  "Soluciones completas para \u003cspan class=\"gradient-text\"\u003ecada desafio\u003c/span\u003e",
+    "site-title":  "Quanvely - Software que impulsa tu negocio",
+    "hero-btn1":  "Comenzar proyecto \u0026rarr;",
+    "portfolio-title":  "Proyectos que \u003cspan class=\"gradient-text\"\u003ehablan por si solos\u003c/span\u003e",
+    "contact-title":  "Hablemos de tu \u003cspan class=\"gradient-text\"\u003eproximo proyecto\u003c/span\u003e",
+    "services-tag":  "Nuestros servicios",
+    "about-f3-desc":  "No te dejamos despues del lanzamiento. Ofrecemos mantenimiento y evolucion continua.",
+    "hero-years":  "5",
+    "services":  [
+                     {
+                         "title":  "Desarrollo Web",
+                         "tags":  "React,Next.js,Node.js",
+                         "desc":  "Aplicaciones web modernas, rapidas y responsivas."
+                     },
+                     {
+                         "title":  "Apps Moviles",
+                         "tags":  "React Native,Flutter,Swift",
+                         "desc":  "Aplicaciones nativas e hibridas para iOS y Android."
+                     },
+                     {
+                         "title":  "Cloud \u0026 DevOps",
+                         "tags":  "AWS,Docker,Kubernetes",
+                         "desc":  "Infraestructura en la nube, CI/CD y automatizacion."
+                     },
+                     {
+                         "title":  "IA \u0026 Machine Learning",
+                         "tags":  "Python,TensorFlow,GPT",
+                         "desc":  "Soluciones inteligentes con inteligencia artificial."
+                     },
+                     {
+                         "title":  "Ciberseguridad",
+                         "tags":  "Auditoria,Pentesting,OWASP",
+                         "desc":  "Proteccion avanzada de datos y auditorias."
+                     },
+                     {
+                         "title":  "Consultoria Tech",
+                         "tags":  "Estrategia,Agile,Scrum",
+                         "desc":  "Asesoria estrategica para transformacion digital."
+                     }
+                 ],
+    "hero-clients":  "30",
+    "contact-location":  "Trabajamos remoto en todo el mundo",
+    "about-title":  "Un equipo apasionado por el \u003cspan class=\"gradient-text\"\u003ecodigo limpio\u003c/span\u003e",
+    "about-f2-title":  "Codigo de calidad",
+    "about-text":  "Somos un equipo de ingenieros, disenadores y estrategas que creen en el poder del software para transformar negocios.",
+    "footer-col3-title":  "Siguenos",
+    "stat-label-clients":  "Clientes satisfechos",
+    "portfolio-tag":  "Portfolio",
+    "hero-title":  "Construimos el \u003cspan class=\"gradient-text\"\u003efuturo digital\u003c/span\u003e de tu empresa",
+    "footer-text":  "Construyendo el futuro digital, una linea de codigo a la vez.",
+    "testimonials-title":  "Lo que dicen \u003cspan class=\"gradient-text\"\u003enuestros clientes\u003c/span\u003e",
+    "hero-projects":  "50",
+    "footer-github":  "https://github.com/quanvel-oficial",
+    "hero-desc":  "En Quanvely creamos soluciones de software a medida, plataformas escalables y productos digitales que transforman negocios.",
+    "cta-title":  "Listo para \u003cspan class=\"gradient-text\"\u003eimpulsar tu negocio\u003c/span\u003e?",
+    "footer-copyright":  "\u0026copy; 2026 Quanvely. Todos los derechos reservados.",
+    "contact-tag":  "Contacto",
+    "hero-badge":  "Software de nueva generacion",
+    "stat-label-projects":  "Proyectos entregados",
+    "footer-col1-title":  "Servicios",
+    "about-f3-title":  "Soporte continuo",
+    "contact-response":  "En menos de 24 horas",
+    "footer-linkedin":  "https://linkedin.com/company/quanvel-oficial",
+    "testimonials-tag":  "Testimonios",
+    "footer-twitter":  "https://twitter.com/quanvel-oficial",
+    "stat-label-years":  "A\u0026ntilde;os de experiencia",
+    "cta-desc":  "Cuentanos sobre tu proyecto y te enviaremos una propuesta personalizada en menos de 24 horas.",
+    "about-f1-desc":  "Entregas iterativas y feedback constante para asegurar que el producto cumpla tus expectativas."
+}
