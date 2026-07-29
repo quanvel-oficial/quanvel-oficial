@@ -196,6 +196,11 @@ function loadFields() {
     if (el) el.value = content[key] || '';
   });
 
+  const savedToken = localStorage.getItem('quanvely-github-token');
+  if (savedToken) {
+    document.getElementById('github-token').value = savedToken;
+  }
+
   renderServices();
   renderPortfolio();
   renderTestimonials();
@@ -265,7 +270,54 @@ function showToast(msg) {
 function handleSave() {
   content = collectFields();
   saveContent(content);
+  const token = document.getElementById('github-token').value;
+  if (token) localStorage.setItem('quanvely-github-token', token);
   showToast('Cambios guardados correctamente');
+}
+
+async function publishToGitHub() {
+  const token = document.getElementById('github-token').value;
+  if (!token) {
+    showToast('Primero ingresa tu token de GitHub en General');
+    switchTab('general');
+    return;
+  }
+
+  const repo = 'quanvel-oficial';
+  const owner = 'quanvel-oficial';
+  const api = `https://api.github.com/repos/${owner}/${repo}/contents`;
+
+  const data = collectFields();
+  const jsonContent = JSON.stringify(data, null, 2);
+  const encoded = btoa(unescape(encodeURIComponent(jsonContent)));
+
+  let sha = null;
+  try {
+    sha = (await (await fetch(`${api}/content.json`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })).json()).sha;
+  } catch(e) {}
+
+  const body = {
+    message: 'Actualizar contenido desde admin',
+    content: encoded,
+    branch: 'main'
+  };
+  if (sha) body.sha = sha;
+
+  try {
+    await fetch(`${api}/content.json`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    showToast('Publicado en GitHub!');
+  } catch(e) {
+    showToast('Error al publicar: ' + e.message);
+  }
 }
 
 function switchTab(tabId) {
@@ -319,6 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('save-all-btn').addEventListener('click', handleSave);
+  document.getElementById('publish-btn').addEventListener('click', publishToGitHub);
 
   document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('quanvely-session');
