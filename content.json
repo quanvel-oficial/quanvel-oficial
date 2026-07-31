@@ -117,5 +117,11 @@
   "style-text-primary": "#f5f3fb",
   "style-text-secondary": "#b8adcf",
   "style-accent": "#8b5cf6",
+  "style-font": "Montserrat",
+  "style-font-size-hero": "77",
+  "style-font-size-title": "16",
+  "style-font-size-text": "16",
+  "style-hero-align": "left",
+  "style-logo-pos": "left",
   "custom-css": ""
 }
