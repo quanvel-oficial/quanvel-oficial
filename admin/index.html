@@ -375,6 +375,54 @@
               </div>
             </div>
             <div class="field-separator"></div>
+            <h4 style="margin-bottom:12px;font-size:0.95rem;">Tipografia (estilo de letra)</h4>
+            <div class="field">
+              <label>Estilo de letra de toda la pagina</label>
+              <select id="style-font" data-key="style-font">
+                <option value="Inter">Inter (recomendado)</option>
+                <option value="Poppins">Poppins</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Roboto">Roboto</option>
+                <option value="Space Grotesk">Space Grotesk</option>
+                <option value="Source Sans 3">Source Sans 3</option>
+                <option value="Lora">Lora</option>
+                <option value="Playfair Display">Playfair Display</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Tamano del titulo principal (px)</label>
+                <input type="number" id="style-font-size-hero" data-key="style-font-size-hero" min="20" max="120">
+              </div>
+              <div class="field">
+                <label>Tamano titulos de seccion (px)</label>
+                <input type="number" id="style-font-size-title" data-key="style-font-size-title" min="16" max="80">
+              </div>
+              <div class="field">
+                <label>Tamano del texto (px)</label>
+                <input type="number" id="style-font-size-text" data-key="style-font-size-text" min="12" max="32">
+              </div>
+            </div>
+            <div class="field-separator"></div>
+            <h4 style="margin-bottom:12px;font-size:0.95rem;">Posicion</h4>
+            <div class="field-row">
+              <div class="field">
+                <label>Alineacion del contenido de inicio (hero)</label>
+                <select id="style-hero-align" data-key="style-hero-align">
+                  <option value="left">Izquierda</option>
+                  <option value="center">Centro</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Posicion del logo en el menu</label>
+                <select id="style-logo-pos" data-key="style-logo-pos">
+                  <option value="left">Izquierda</option>
+                  <option value="center">Centro</option>
+                  <option value="right">Derecha</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-separator"></div>
             <h4 style="margin-bottom:12px;font-size:0.95rem;">CSS avanzado</h4>
             <div class="field">
               <label>CSS personalizado (sobrescribe cualquier estilo de la pagina)</label>
@@ -389,6 +437,6 @@
   </div>
 
   <div id="toast" class="toast">Cambios guardados</div>
-  <script src="admin.js?v=5"></script>
+  <script src="admin.js?v=6"></script>
 </body>
 </html>
