@@ -82,6 +82,12 @@ const DEFAULT_CONTENT = {
   'style-text-primary': '#f5f3fb',
   'style-text-secondary': '#b8adcf',
   'style-accent': '#8b5cf6',
+  'style-font': 'Inter',
+  'style-font-size-hero': '77',
+  'style-font-size-title': '38',
+  'style-font-size-text': '16',
+  'style-hero-align': 'left',
+  'style-logo-pos': 'left',
   'custom-css': ''
 };
 
@@ -237,6 +243,7 @@ function loadFields() {
     'footer-text', 'footer-copyright', 'footer-col1-title', 'footer-col2-title', 'footer-col3-title',
     'footer-github', 'footer-linkedin', 'footer-twitter',
     'style-bg-primary', 'style-bg-secondary', 'style-bg-card', 'style-text-primary', 'style-text-secondary', 'style-accent',
+    'style-font', 'style-font-size-hero', 'style-font-size-title', 'style-font-size-text', 'style-hero-align', 'style-logo-pos',
     'custom-css'
   ];
 
@@ -269,6 +276,7 @@ function collectFields() {
     'footer-text', 'footer-copyright', 'footer-col1-title', 'footer-col2-title', 'footer-col3-title',
     'footer-github', 'footer-linkedin', 'footer-twitter',
     'style-bg-primary', 'style-bg-secondary', 'style-bg-card', 'style-text-primary', 'style-text-secondary', 'style-accent',
+    'style-font', 'style-font-size-hero', 'style-font-size-title', 'style-font-size-text', 'style-hero-align', 'style-logo-pos',
     'custom-css'
   ];
 
