@@ -58,7 +58,7 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, #3d2a63 0%, #2a1a40 45%, #2a1a40 100%);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 45%, var(--bg-primary) 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.65;
@@ -85,10 +85,10 @@ body {
 }
 
 .navbar.scrolled {
-  background: rgba(42, 26, 64, 0.85);
+  background: color-mix(in srgb, var(--bg-primary) 82%, transparent);
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid rgba(74, 58, 110, 0.6);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   padding: 12px 0;
 }
 
@@ -629,7 +629,7 @@ section {
 }
 
 .code-block {
-  background: #3a2a5c;
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1177,7 +1177,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(42, 26, 64, 0.96);
+    background: color-mix(in srgb, var(--bg-primary) 96%, transparent);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     flex-direction: column;
