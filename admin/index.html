@@ -149,7 +149,10 @@
               <input type="text" id="services-title" data-key="services-title">
               <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
             </div>
-            <p class="card-desc" style="margin-top:24px;">Edita cada uno de los 6 servicios</p>
+            <div class="field-row" style="justify-content:space-between;align-items:center;">
+              <p class="card-desc">Edita cada servicio. Usa el boton para agregar mas.</p>
+              <button type="button" class="add-btn" onclick="addService()">+ Agregar servicio</button>
+            </div>
             <div id="services-list"></div>
           </div>
         </div>
@@ -211,7 +214,10 @@
               <input type="text" id="portfolio-title" data-key="portfolio-title">
               <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
             </div>
-            <p class="card-desc" style="margin-top:24px;">Edita los 3 proyectos</p>
+            <div class="field-row" style="justify-content:space-between;align-items:center;">
+              <p class="card-desc">Edita cada proyecto. Usa el boton para agregar mas.</p>
+              <button type="button" class="add-btn" onclick="addPortfolio()">+ Agregar proyecto</button>
+            </div>
             <div id="portfolio-list"></div>
           </div>
         </div>
@@ -229,7 +235,10 @@
               <input type="text" id="testimonials-title" data-key="testimonials-title">
               <small>Usa &lt;span class="gradient-text"&gt;texto&lt;/span&gt; para gradiente</small>
             </div>
-            <p class="card-desc" style="margin-top:24px;">Edita los 3 testimonios</p>
+            <div class="field-row" style="justify-content:space-between;align-items:center;">
+              <p class="card-desc">Edita cada testimonio. Usa el boton para agregar mas.</p>
+              <button type="button" class="add-btn" onclick="addTestimonial()">+ Agregar testimonio</button>
+            </div>
             <div id="testimonials-list"></div>
           </div>
         </div>
@@ -379,6 +388,6 @@
   </div>
 
   <div id="toast" class="toast">Cambios guardados</div>
-  <script src="admin.js?v=3"></script>
+  <script src="admin.js?v=4"></script>
 </body>
 </html>
