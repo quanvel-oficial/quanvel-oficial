@@ -88,6 +88,7 @@ const DEFAULT_CONTENT = {
   'style-font-size-text': '16',
   'style-hero-align': 'left',
   'style-logo-pos': 'left',
+  'page-sections': ['hero', 'services', 'about', 'portfolio', 'testimonials', 'cta', 'contact', 'footer'],
   'custom-css': ''
 };
 
@@ -117,7 +118,11 @@ function renderServices() {
     div.innerHTML = `
       <div class="item-header">
         <h4>Servicio ${i + 1}</h4>
-        <button type="button" class="delete-btn" onclick="deleteService(${i})" title="Eliminar servicio">&times;</button>
+        <div class="item-actions">
+          <button type="button" class="order-btn" onclick="moveService(${i},-1)" ${i === 0 ? 'disabled' : ''} title="Mover arriba">&#9650;</button>
+          <button type="button" class="order-btn" onclick="moveService(${i},1)" ${i === content.services.length - 1 ? 'disabled' : ''} title="Mover abajo">&#9660;</button>
+          <button type="button" class="delete-btn" onclick="deleteService(${i})" title="Eliminar servicio">&times;</button>
+        </div>
       </div>
       <div class="field">
         <label>Titulo</label>
@@ -145,7 +150,11 @@ function renderPortfolio() {
     div.innerHTML = `
       <div class="item-header">
         <h4>Proyecto ${i + 1}</h4>
-        <button type="button" class="delete-btn" onclick="deletePortfolio(${i})" title="Eliminar proyecto">&times;</button>
+        <div class="item-actions">
+          <button type="button" class="order-btn" onclick="movePortfolio(${i},-1)" ${i === 0 ? 'disabled' : ''} title="Mover arriba">&#9650;</button>
+          <button type="button" class="order-btn" onclick="movePortfolio(${i},1)" ${i === content.portfolio.length - 1 ? 'disabled' : ''} title="Mover abajo">&#9660;</button>
+          <button type="button" class="delete-btn" onclick="deletePortfolio(${i})" title="Eliminar proyecto">&times;</button>
+        </div>
       </div>
       <div class="field">
         <label>Titulo</label>
@@ -173,7 +182,11 @@ function renderTestimonials() {
     div.innerHTML = `
       <div class="item-header">
         <h4>Testimonio ${i + 1}</h4>
-        <button type="button" class="delete-btn" onclick="deleteTestimonial(${i})" title="Eliminar testimonio">&times;</button>
+        <div class="item-actions">
+          <button type="button" class="order-btn" onclick="moveTestimonial(${i},-1)" ${i === 0 ? 'disabled' : ''} title="Mover arriba">&#9650;</button>
+          <button type="button" class="order-btn" onclick="moveTestimonial(${i},1)" ${i === content.testimonials.length - 1 ? 'disabled' : ''} title="Mover abajo">&#9660;</button>
+          <button type="button" class="delete-btn" onclick="deleteTestimonial(${i})" title="Eliminar testimonio">&times;</button>
+        </div>
       </div>
       <div class="field">
         <label>Nombre</label>
@@ -197,6 +210,13 @@ function addService() {
   renderServices();
 }
 
+function moveService(i, dir) {
+  const j = i + dir;
+  if (j < 0 || j >= content.services.length) return;
+  [content.services[i], content.services[j]] = [content.services[j], content.services[i]];
+  renderServices();
+}
+
 function deleteService(i) {
   content.services.splice(i, 1);
   renderServices();
@@ -204,6 +224,13 @@ function deleteService(i) {
 
 function addPortfolio() {
   content.portfolio.push({ title: 'Nuevo proyecto', type: 'SaaS', desc: 'Describe el proyecto aqui.' });
+  renderPortfolio();
+}
+
+function movePortfolio(i, dir) {
+  const j = i + dir;
+  if (j < 0 || j >= content.portfolio.length) return;
+  [content.portfolio[i], content.portfolio[j]] = [content.portfolio[j], content.portfolio[i]];
   renderPortfolio();
 }
 
@@ -217,9 +244,54 @@ function addTestimonial() {
   renderTestimonials();
 }
 
+function moveTestimonial(i, dir) {
+  const j = i + dir;
+  if (j < 0 || j >= content.testimonials.length) return;
+  [content.testimonials[i], content.testimonials[j]] = [content.testimonials[j], content.testimonials[i]];
+  renderTestimonials();
+}
+
 function deleteTestimonial(i) {
   content.testimonials.splice(i, 1);
   renderTestimonials();
+}
+
+function renderSections() {
+  const container = document.getElementById('sections-list');
+  if (!container) return;
+  const names = {
+    hero: 'Inicio (hero)',
+    services: 'Servicios',
+    about: 'Sobre nosotros',
+    portfolio: 'Portfolio',
+    testimonials: 'Testimonios',
+    cta: 'CTA (trabajemos juntos)',
+    contact: 'Contacto',
+    footer: 'Footer'
+  };
+  container.innerHTML = '';
+  const order = content['page-sections'];
+  if (!order || !order.length) return;
+  order.forEach((id, i) => {
+    const div = document.createElement('div');
+    div.className = 'section-order-item';
+    div.innerHTML = `
+      <span>${i + 1}. ${names[id] || id}</span>
+      <div class="item-actions">
+        <button type="button" class="order-btn" onclick="moveSection(${i},-1)" ${i === 0 ? 'disabled' : ''} title="Mover arriba">&#9650;</button>
+        <button type="button" class="order-btn" onclick="moveSection(${i},1)" ${i === order.length - 1 ? 'disabled' : ''} title="Mover abajo">&#9660;</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function moveSection(i, dir) {
+  const order = content['page-sections'];
+  const j = i + dir;
+  if (j < 0 || j >= order.length) return;
+  [order[i], order[j]] = [order[j], order[i]];
+  renderSections();
 }
 
 function escHtml(str) {
@@ -260,6 +332,7 @@ function loadFields() {
   renderServices();
   renderPortfolio();
   renderTestimonials();
+  renderSections();
 }
 
 function collectFields() {
