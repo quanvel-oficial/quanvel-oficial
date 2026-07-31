@@ -109,7 +109,10 @@ function renderServices() {
     const div = document.createElement('div');
     div.className = 'service-item';
     div.innerHTML = `
-      <h4>Servicio ${i + 1}</h4>
+      <div class="item-header">
+        <h4>Servicio ${i + 1}</h4>
+        <button type="button" class="delete-btn" onclick="deleteService(${i})" title="Eliminar servicio">&times;</button>
+      </div>
       <div class="field">
         <label>Titulo</label>
         <input type="text" class="s-title" value="${escHtml(s.title)}">
@@ -134,7 +137,10 @@ function renderPortfolio() {
     const div = document.createElement('div');
     div.className = 'portfolio-item';
     div.innerHTML = `
-      <h4>Proyecto ${i + 1}</h4>
+      <div class="item-header">
+        <h4>Proyecto ${i + 1}</h4>
+        <button type="button" class="delete-btn" onclick="deletePortfolio(${i})" title="Eliminar proyecto">&times;</button>
+      </div>
       <div class="field">
         <label>Titulo</label>
         <input type="text" class="p-title" value="${escHtml(p.title)}">
@@ -159,7 +165,10 @@ function renderTestimonials() {
     const div = document.createElement('div');
     div.className = 'testimonial-item';
     div.innerHTML = `
-      <h4>Testimonio ${i + 1}</h4>
+      <div class="item-header">
+        <h4>Testimonio ${i + 1}</h4>
+        <button type="button" class="delete-btn" onclick="deleteTestimonial(${i})" title="Eliminar testimonio">&times;</button>
+      </div>
       <div class="field">
         <label>Nombre</label>
         <input type="text" class="t-name" value="${escHtml(t.name)}">
@@ -175,6 +184,36 @@ function renderTestimonials() {
     `;
     container.appendChild(div);
   });
+}
+
+function addService() {
+  content.services.push({ title: 'Nuevo servicio', desc: 'Describe tu servicio aqui.', tags: 'Tag1,Tag2' });
+  renderServices();
+}
+
+function deleteService(i) {
+  content.services.splice(i, 1);
+  renderServices();
+}
+
+function addPortfolio() {
+  content.portfolio.push({ title: 'Nuevo proyecto', type: 'SaaS', desc: 'Describe el proyecto aqui.' });
+  renderPortfolio();
+}
+
+function deletePortfolio(i) {
+  content.portfolio.splice(i, 1);
+  renderPortfolio();
+}
+
+function addTestimonial() {
+  content.testimonials.push({ name: 'Nuevo cliente', role: 'Cargo', text: 'Escribe el testimonio aqui.' });
+  renderTestimonials();
+}
+
+function deleteTestimonial(i) {
+  content.testimonials.splice(i, 1);
+  renderTestimonials();
 }
 
 function escHtml(str) {
