@@ -84,6 +84,11 @@
     return d.innerHTML;
   }
 
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved) applyContent(saved);
+  } catch(e) {}
+
   fetch('https://api.github.com/repos/quanvel-oficial/quanvel-oficial/contents/content.json?_=' + Date.now())
     .then(function(r) {
       if (!r.ok) throw new Error('No disponible');
@@ -93,10 +98,5 @@
       var json = decodeURIComponent(escape(atob(data.content)));
       applyContent(JSON.parse(json));
     })
-    .catch(function() {
-      try {
-        var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        if (saved) applyContent(saved);
-      } catch(e) {}
-    });
+    .catch(function() {});
 })();
