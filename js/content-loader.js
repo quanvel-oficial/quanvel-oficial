@@ -9,6 +9,7 @@
       if (saved[key] !== undefined) {
         if (key.indexOf('hero-projects') > -1 || key.indexOf('hero-clients') > -1 || key.indexOf('hero-years') > -1) {
           el.textContent = saved[key];
+          el.setAttribute('data-target', saved[key]);
         } else if (key === 'site-title') {
           document.title = saved[key];
         } else if (key === 'footer-github' || key === 'footer-linkedin' || key === 'footer-twitter') {
