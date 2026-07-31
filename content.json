@@ -110,5 +110,12 @@
   "footer-col3-title": "Siguenos",
   "footer-github": "https://github.com/quanvely",
   "footer-linkedin": "https://linkedin.com/company/quanvely",
-  "footer-twitter": "https://twitter.com/quanvely"
+  "footer-twitter": "https://twitter.com/quanvely",
+  "style-bg-primary": "#2a1a40",
+  "style-bg-secondary": "#332152",
+  "style-bg-card": "#3d2a63",
+  "style-text-primary": "#f5f3fb",
+  "style-text-secondary": "#b8adcf",
+  "style-accent": "#8b5cf6",
+  "custom-css": ""
 }
