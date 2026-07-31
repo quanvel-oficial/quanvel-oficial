@@ -101,6 +101,13 @@
         }).join('');
       }
     }
+
+    if (saved['page-sections'] && saved['page-sections'].length) {
+      saved['page-sections'].forEach(function(id) {
+        var el = document.querySelector('[data-section="' + id + '"]');
+        if (el) document.body.appendChild(el);
+      });
+    }
   }
 
   function esc(str) {
