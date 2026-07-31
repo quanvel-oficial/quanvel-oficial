@@ -74,7 +74,15 @@ const DEFAULT_CONTENT = {
   'footer-col3-title': 'Siguenos',
   'footer-github': 'https://github.com/quanvely',
   'footer-linkedin': 'https://linkedin.com/company/quanvely',
-  'footer-twitter': 'https://twitter.com/quanvely'
+  'footer-twitter': 'https://twitter.com/quanvely',
+
+  'style-bg-primary': '#2a1a40',
+  'style-bg-secondary': '#332152',
+  'style-bg-card': '#3d2a63',
+  'style-text-primary': '#f5f3fb',
+  'style-text-secondary': '#b8adcf',
+  'style-accent': '#8b5cf6',
+  'custom-css': ''
 };
 
 function loadContent() {
@@ -188,7 +196,9 @@ function loadFields() {
     'cta-tag', 'cta-title', 'cta-desc', 'cta-btn',
     'contact-tag', 'contact-title', 'contact-email', 'contact-location', 'contact-response', 'contact-submit',
     'footer-text', 'footer-copyright', 'footer-col1-title', 'footer-col2-title', 'footer-col3-title',
-    'footer-github', 'footer-linkedin', 'footer-twitter'
+    'footer-github', 'footer-linkedin', 'footer-twitter',
+    'style-bg-primary', 'style-bg-secondary', 'style-bg-card', 'style-text-primary', 'style-text-secondary', 'style-accent',
+    'custom-css'
   ];
 
   allKeys.forEach(key => {
@@ -218,7 +228,9 @@ function collectFields() {
     'cta-tag', 'cta-title', 'cta-desc', 'cta-btn',
     'contact-tag', 'contact-title', 'contact-email', 'contact-location', 'contact-response', 'contact-submit',
     'footer-text', 'footer-copyright', 'footer-col1-title', 'footer-col2-title', 'footer-col3-title',
-    'footer-github', 'footer-linkedin', 'footer-twitter'
+    'footer-github', 'footer-linkedin', 'footer-twitter',
+    'style-bg-primary', 'style-bg-secondary', 'style-bg-card', 'style-text-primary', 'style-text-secondary', 'style-accent',
+    'custom-css'
   ];
 
   const newContent = { ...content };
@@ -344,7 +356,8 @@ function switchTab(tabId) {
     testimonials: 'Testimonios',
     cta: 'CTA',
     contact: 'Contacto',
-    footer: 'Footer'
+    footer: 'Footer',
+    styles: 'Estilos'
   };
   document.getElementById('tab-title').textContent = titles[tabId] || tabId;
 }
