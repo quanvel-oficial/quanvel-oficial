@@ -5,20 +5,20 @@
 }
 
 :root {
-  --bg-primary: #0d0717;
-  --bg-secondary: #150c24;
-  --bg-card: #1d1230;
-  --bg-card-hover: #251845;
-  --border: #2b1c45;
-  --border-hover: #3c2a63;
-  --text-primary: #f1f1f7;
-  --text-secondary: #a99ec2;
-  --text-muted: #6e6290;
-  --accent: #7c3aed;
-  --accent-light: #a78bfa;
-  --accent-dark: #5b21b6;
-  --accent-glow: rgba(124, 58, 237, 0.35);
-  --accent-glow-subtle: rgba(124, 58, 237, 0.12);
+  --bg-primary: #2a1a40;
+  --bg-secondary: #332152;
+  --bg-card: #3d2a63;
+  --bg-card-hover: #4a357a;
+  --border: #4a3a6e;
+  --border-hover: #5c4a8c;
+  --text-primary: #f5f3fb;
+  --text-secondary: #b8adcf;
+  --text-muted: #8a7ba8;
+  --accent: #8b5cf6;
+  --accent-light: #c4b5fd;
+  --accent-dark: #6d28d9;
+  --accent-glow: rgba(139, 92, 246, 0.35);
+  --accent-glow-subtle: rgba(139, 92, 246, 0.12);
   --gradient-1: linear-gradient(135deg, #7c3aed, #a855f7, #ec4899);
   --gradient-2: linear-gradient(135deg, #7c3aed, #3b82f6);
   --gradient-3: linear-gradient(135deg, #f59e0b, #ef4444);
@@ -58,7 +58,7 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, #150c24 0%, #0d0717 35%, #0d0717 100%);
+  background: linear-gradient(180deg, #3d2a63 0%, #2a1a40 45%, #2a1a40 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.65;
@@ -85,10 +85,10 @@ body {
 }
 
 .navbar.scrolled {
-  background: rgba(13, 7, 23, 0.82);
+  background: rgba(42, 26, 64, 0.85);
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid rgba(43, 28, 69, 0.6);
+  border-bottom: 1px solid rgba(74, 58, 110, 0.6);
   padding: 12px 0;
 }
 
@@ -629,7 +629,7 @@ section {
 }
 
 .code-block {
-  background: #160e28;
+  background: #3a2a5c;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1177,7 +1177,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(13, 7, 23, 0.96);
+    background: rgba(42, 26, 64, 0.96);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     flex-direction: column;
