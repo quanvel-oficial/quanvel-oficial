@@ -7,9 +7,6 @@
     </linearGradient>
   </defs>
   <rect x="32" y="32" width="960" height="960" rx="235" fill="url(#brand)"/>
-  <rect x="272" y="316" width="480" height="392" rx="118" fill="none" stroke="#ffffff" stroke-width="56"/>
-  <circle cx="512" cy="512" r="132" fill="none" stroke="#ffffff" stroke-width="56"/>
-  <circle cx="512" cy="512" r="42" fill="#ffffff"/>
-  <circle cx="668" cy="356" r="30" fill="#ffffff"/>
-  <circle cx="832" cy="192" r="26" fill="#ffffff" opacity="0.92"/>
+  <circle cx="500" cy="470" r="165" fill="none" stroke="#ffffff" stroke-width="92"/>
+  <path d="M 615 585 L 680 650" stroke="#ffffff" stroke-width="92" stroke-linecap="round"/>
 </svg>
