@@ -5,15 +5,15 @@
 }
 
 :root {
-  --bg-primary: #050509;
-  --bg-secondary: #0a0a10;
-  --bg-card: #111118;
-  --bg-card-hover: #181822;
-  --border: #1e1e2a;
-  --border-hover: #2e2e44;
+  --bg-primary: #0d0717;
+  --bg-secondary: #150c24;
+  --bg-card: #1d1230;
+  --bg-card-hover: #251845;
+  --border: #2b1c45;
+  --border-hover: #3c2a63;
   --text-primary: #f1f1f7;
-  --text-secondary: #9494a8;
-  --text-muted: #5c5c72;
+  --text-secondary: #a99ec2;
+  --text-muted: #6e6290;
   --accent: #7c3aed;
   --accent-light: #a78bfa;
   --accent-dark: #5b21b6;
@@ -58,7 +58,8 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
+  background: linear-gradient(180deg, #150c24 0%, #0d0717 35%, #0d0717 100%);
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.65;
   overflow-x: hidden;
@@ -84,10 +85,10 @@ body {
 }
 
 .navbar.scrolled {
-  background: rgba(5, 5, 9, 0.82);
+  background: rgba(13, 7, 23, 0.82);
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid rgba(30, 30, 42, 0.6);
+  border-bottom: 1px solid rgba(43, 28, 69, 0.6);
   padding: 12px 0;
 }
 
@@ -628,7 +629,7 @@ section {
 }
 
 .code-block {
-  background: #0c0c14;
+  background: #160e28;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1176,7 +1177,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(5, 5, 9, 0.96);
+    background: rgba(13, 7, 23, 0.96);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     flex-direction: column;
