@@ -4,6 +4,25 @@
   function applyContent(saved) {
     if (!saved) return;
 
+    var css = ':root{';
+    var colorKeys = ['style-bg-primary', 'style-bg-secondary', 'style-bg-card', 'style-text-primary', 'style-text-secondary', 'style-accent'];
+    var cssVars = {
+      'style-bg-primary': '--bg-primary',
+      'style-bg-secondary': '--bg-secondary',
+      'style-bg-card': '--bg-card',
+      'style-text-primary': '--text-primary',
+      'style-text-secondary': '--text-secondary',
+      'style-accent': '--accent'
+    };
+    colorKeys.forEach(function(k) {
+      if (saved[k]) css += cssVars[k] + ':' + saved[k] + ';';
+    });
+    css += '}';
+    if (saved['custom-css']) css += saved['custom-css'];
+    var styleEl = document.createElement('style');
+    styleEl.textContent = css;
+    document.head.appendChild(styleEl);
+
     document.querySelectorAll('[data-key]').forEach(function(el) {
       var key = el.getAttribute('data-key');
       if (saved[key] !== undefined) {
