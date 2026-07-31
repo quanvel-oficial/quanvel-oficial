@@ -56,8 +56,9 @@
       if (portfolioGrid) {
         var gradients = ['linear-gradient(135deg, #6366f1, #8b5cf6)', 'linear-gradient(135deg, #06b6d4, #3b82f6)', 'linear-gradient(135deg, #f43f5e, #ec4899)'];
         portfolioGrid.innerHTML = saved.portfolio.map(function(p, i) {
-          var delay = i === 0 ? '' : i === 1 ? ' delay-100' : ' delay-200';
-          return '<div class="portfolio-card fade-in' + delay + '"><div class="portfolio-preview" style="background: ' + gradients[i] + ';"><span class="portfolio-type">' + esc(p.type) + '</span></div><div class="portfolio-info"><h3>' + esc(p.title) + '</h3><p>' + esc(p.desc) + '</p></div></div>';
+          var bg = gradients[i] || gradients[i % gradients.length];
+          var delay = i === 0 ? '' : i === 1 ? ' delay-100' : i === 2 ? ' delay-200' : ' delay-' + (i % 3 * 100);
+          return '<div class="portfolio-card fade-in' + delay + '"><div class="portfolio-preview" style="background: ' + bg + ';"><span class="portfolio-type">' + esc(p.type) + '</span></div><div class="portfolio-info"><h3>' + esc(p.title) + '</h3><p>' + esc(p.desc) + '</p></div></div>';
         }).join('');
       }
     }
@@ -67,9 +68,10 @@
       if (testimonialsGrid) {
         var avatars = ['background:linear-gradient(135deg,#6366f1,#8b5cf6)', 'background:linear-gradient(135deg,#06b6d4,#3b82f6)', 'background:linear-gradient(135deg,#f59e0b,#ef4444)'];
         testimonialsGrid.innerHTML = saved.testimonials.map(function(t, i) {
-          var delay = i === 0 ? '' : i === 1 ? ' delay-100' : ' delay-200';
+          var av = avatars[i] || avatars[i % avatars.length];
+          var delay = i === 0 ? '' : i === 1 ? ' delay-100' : i === 2 ? ' delay-200' : ' delay-' + (i % 3 * 100);
           var initial = t.name ? t.name.charAt(0).toUpperCase() : '?';
-          return '<div class="testimonial-card fade-in-scale' + delay + '"><div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"' + esc(t.text) + '"</p><div class="testimonial-author"><div class="testimonial-avatar" style="' + avatars[i] + '">' + initial + '</div><div><h4>' + esc(t.name) + '</h4><p>' + esc(t.role) + '</p></div></div></div>';
+          return '<div class="testimonial-card fade-in-scale' + delay + '"><div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"' + esc(t.text) + '"</p><div class="testimonial-author"><div class="testimonial-avatar" style="' + av + '">' + initial + '</div><div><h4>' + esc(t.name) + '</h4><p>' + esc(t.role) + '</p></div></div></div>';
         }).join('');
       }
     }
