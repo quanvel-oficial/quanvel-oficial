@@ -17,11 +17,37 @@
     colorKeys.forEach(function(k) {
       if (saved[k]) css += cssVars[k] + ':' + saved[k] + ';';
     });
+    if (saved['style-font-size-hero']) css += '--font-size-hero:' + saved['style-font-size-hero'] + 'px;';
+    if (saved['style-font-size-title']) css += '--font-size-title:' + saved['style-font-size-title'] + 'px;';
+    if (saved['style-font-size-text']) css += '--font-size-text:' + saved['style-font-size-text'] + 'px;';
     css += '}';
+
+    var font = saved['style-font'] || 'Inter';
+    var fonts = {
+      'Inter': 'Inter',
+      'Poppins': 'Poppins',
+      'Montserrat': 'Montserrat',
+      'Roboto': 'Roboto',
+      'Space Grotesk': 'Space+Grotesk',
+      'Source Sans 3': 'Source+Sans+3',
+      'Lora': 'Lora',
+      'Playfair Display': 'Playfair+Display'
+    };
+    var gf = fonts[font] || 'Inter';
+    var fontLink = document.createElement('link');
+    fontLink.rel = 'stylesheet';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=' + gf + ':wght@300;400;500;600;700;800&display=swap';
+    document.head.appendChild(fontLink);
+    css += "body{font-family:'" + font + "',-apple-system,BlinkMacSystemFont,sans-serif;}";
+    css += 'h1,h2,h3,h4,h5,h6{font-family:' + "'" + font + "'" + ',-apple-system,BlinkMacSystemFont,sans-serif;}';
+
     if (saved['custom-css']) css += saved['custom-css'];
     var styleEl = document.createElement('style');
     styleEl.textContent = css;
     document.head.appendChild(styleEl);
+
+    if (saved['style-hero-align'] === 'center') document.body.classList.add('hero-center');
+    if (saved['style-logo-pos'] && saved['style-logo-pos'] !== 'left') document.body.classList.add('logo-' + saved['style-logo-pos']);
 
     document.querySelectorAll('[data-key]').forEach(function(el) {
       var key = el.getAttribute('data-key');
