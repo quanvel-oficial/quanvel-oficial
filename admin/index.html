@@ -38,6 +38,7 @@
         <button class="nav-btn" data-tab="cta">CTA</button>
         <button class="nav-btn" data-tab="contact">Contacto</button>
         <button class="nav-btn" data-tab="footer">Footer</button>
+        <button class="nav-btn" data-tab="styles">Estilos</button>
       </nav>
       <div class="sidebar-footer">
         <a href="../index.html" target="_blank" class="preview-link">&#128065; Modo lectura &rarr;</a>
@@ -328,11 +329,56 @@
           </div>
         </div>
 
+        <!-- ESTILOS -->
+        <div id="tab-styles" class="tab-content">
+          <div class="card">
+            <h3>Colores principales</h3>
+            <small style="display:block;margin-bottom:16px;color:#8a7ba8;">Los colores se aplican a toda la pagina. Elige un color y se actualizara en la lectura.</small>
+            <div class="field-row">
+              <div class="field">
+                <label>Color de fondo principal</label>
+                <input type="color" id="style-bg-primary" data-key="style-bg-primary">
+              </div>
+              <div class="field">
+                <label>Color de fondo superior (degradado)</label>
+                <input type="color" id="style-bg-secondary" data-key="style-bg-secondary">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Color de tarjetas</label>
+                <input type="color" id="style-bg-card" data-key="style-bg-card">
+              </div>
+              <div class="field">
+                <label>Color del texto principal</label>
+                <input type="color" id="style-text-primary" data-key="style-text-primary">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Color de acento (botones y enlaces)</label>
+                <input type="color" id="style-accent" data-key="style-accent">
+              </div>
+              <div class="field">
+                <label>Color de texto secundario</label>
+                <input type="color" id="style-text-secondary" data-key="style-text-secondary">
+              </div>
+            </div>
+            <div class="field-separator"></div>
+            <h4 style="margin-bottom:12px;font-size:0.95rem;">CSS avanzado</h4>
+            <div class="field">
+              <label>CSS personalizado (sobrescribe cualquier estilo de la pagina)</label>
+              <textarea id="custom-css" data-key="custom-css" rows="10" placeholder="/* Ejemplo: */&#10;:root { --radius: 8px; }&#10;.hero-title { font-size: 4rem; }" style="font-family:monospace;font-size:0.85rem;"></textarea>
+              <small>Todo CSS valido. Puedes usar variables: --bg-primary, --bg-secondary, --bg-card, --text-primary, --text-secondary, --accent, --gradient-1, etc.</small>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
 
   <div id="toast" class="toast">Cambios guardados</div>
-  <script src="admin.js?v=2"></script>
+  <script src="admin.js?v=3"></script>
 </body>
 </html>
