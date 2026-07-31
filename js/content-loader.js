@@ -1,6 +1,5 @@
 (function() {
   var STORAGE_KEY = 'quanvely-content';
-  var GITHUB_URL = 'https://raw.githubusercontent.com/quanvel-oficial/quanvel-oficial/main/content.json';
 
   function applyContent(saved) {
     if (!saved) return;
@@ -63,13 +62,14 @@
     return d.innerHTML;
   }
 
-  fetch(GITHUB_URL + '?_=' + Date.now())
+  fetch('https://api.github.com/repos/quanvel-oficial/quanvel-oficial/contents/content.json?_=' + Date.now())
     .then(function(r) {
       if (!r.ok) throw new Error('No disponible');
       return r.json();
     })
     .then(function(data) {
-      applyContent(data);
+      var json = decodeURIComponent(escape(atob(data.content)));
+      applyContent(JSON.parse(json));
     })
     .catch(function() {
       try {
