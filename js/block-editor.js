@@ -11,6 +11,13 @@
   dropLine.className = 'block-drop-line';
   document.body.appendChild(dropLine);
 
+  var ghost = null;
+  var draggedEl = null;
+  var startY = 0;
+  var startX = 0;
+  var offsetY = 0;
+  var dragging = false;
+
   function showToast(msg) {
     var t = document.getElementById('blocks-toast');
     t.textContent = msg;
@@ -24,9 +31,6 @@
     hint.style.display = on ? 'block' : 'none';
     btn.classList.toggle('active', on);
     btn.innerHTML = on ? '&#10005;' : '&#9776;';
-    document.querySelectorAll('[data-block]').forEach(function(el) {
-      el.setAttribute('draggable', on ? 'true' : 'false');
-    });
   }
 
   function collectOrder() {
@@ -88,64 +92,86 @@
     publishOrder(order);
   }
 
-  document.addEventListener('dragstart', function(e) {
-    if (!editMode) return;
-    var el = e.target.closest('[data-block]');
-    if (!el) return;
-    el.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-    try { e.dataTransfer.setData('text/plain', el.getAttribute('data-block')); } catch (err) {}
-  });
-
-  document.addEventListener('dragend', function(e) {
-    var el = document.querySelector('.dragging');
-    if (el) el.classList.remove('dragging');
-    dropLine.classList.remove('show');
-  });
-
-  document.addEventListener('dragover', function(e) {
-    if (!editMode) return;
-    var container = e.target.closest('[data-block-container]');
-    if (!container) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    var children = container.querySelectorAll(':scope > [data-block]');
-    var target = e.target.closest(':scope > [data-block]');
-    if (!target && e.target !== container && !container.contains(e.target)) return;
+  function getInsertionPoint(container, clientY) {
+    var children = Array.prototype.slice.call(container.querySelectorAll(':scope > [data-block]')).filter(function(c) { return c !== draggedEl; });
     var before = null;
     children.forEach(function(child) {
       var r = child.getBoundingClientRect();
-      if (e.clientY < r.top + r.height / 2) {
-        if (!before) before = child;
-      }
+      if (clientY < r.top + r.height / 2 && !before) before = child;
     });
+    return before;
+  }
+
+  function updateDropLine(container, clientY) {
+    var before = getInsertionPoint(container, clientY);
+    var children = Array.prototype.slice.call(container.querySelectorAll(':scope > [data-block]')).filter(function(c) { return c !== draggedEl; });
     if (before) {
       dropLine.classList.add('show');
       dropLine.style.top = (before.getBoundingClientRect().top - 4) + 'px';
     } else if (children.length) {
       dropLine.classList.add('show');
       dropLine.style.top = (children[children.length - 1].getBoundingClientRect().bottom + 4) + 'px';
+    } else {
+      dropLine.classList.remove('show');
+    }
+  }
+
+  document.addEventListener('mousedown', function(e) {
+    if (!editMode || e.button !== 0) return;
+    if (e.target.closest('#edit-blocks-btn')) return;
+    var el = e.target.closest('[data-block]');
+    if (!el) return;
+    draggedEl = el;
+    startY = e.clientY;
+    startX = e.clientX;
+    dragging = false;
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!draggedEl) return;
+    if (!dragging) {
+      if (Math.abs(e.clientY - startY) < 6 && Math.abs(e.clientX - startX) < 6) return;
+      dragging = true;
+      ghost = draggedEl.cloneNode(true);
+      ghost.classList.add('block-ghost');
+      var rect = draggedEl.getBoundingClientRect();
+      offsetY = e.clientY - rect.top;
+      ghost.style.width = rect.width + 'px';
+      document.body.appendChild(ghost);
+      draggedEl.classList.add('dragging');
+    }
+    ghost.style.left = (e.clientX - ghost.getBoundingClientRect().width / 2) + 'px';
+    ghost.style.top = (e.clientY - offsetY) + 'px';
+    var elUnder = document.elementFromPoint(e.clientX, e.clientY);
+    var container = elUnder ? elUnder.closest('[data-block-container]') : null;
+    if (container && container.contains(draggedEl)) {
+      dropLine.classList.add('active');
+      updateDropLine(container, e.clientY);
+    } else {
+      dropLine.classList.remove('show');
     }
   });
 
-  document.addEventListener('drop', function(e) {
-    if (!editMode) return;
-    e.preventDefault();
-    var container = e.target.closest('[data-block-container]');
-    var dragged = document.querySelector('.dragging');
-    if (!container || !dragged) return;
-    if (!container.contains(dragged)) return;
+  document.addEventListener('mouseup', function(e) {
+    if (!draggedEl) return;
+    var elUnder = document.elementFromPoint(e.clientX, e.clientY);
+    var container = elUnder ? elUnder.closest('[data-block-container]') : null;
+    var moved = false;
+    if (container && container.contains(draggedEl)) {
+      var before = getInsertionPoint(container, e.clientY);
+      if (before) container.insertBefore(draggedEl, before);
+      else container.appendChild(draggedEl);
+      moved = true;
+    }
+    if (ghost) {
+      ghost.parentNode.removeChild(ghost);
+      ghost = null;
+    }
+    draggedEl.classList.remove('dragging');
     dropLine.classList.remove('show');
-    var children = Array.prototype.slice.call(container.querySelectorAll(':scope > [data-block]'));
-    children = children.filter(function(c) { return c !== dragged; });
-    var before = null;
-    children.forEach(function(child) {
-      var r = child.getBoundingClientRect();
-      if (e.clientY < r.top + r.height / 2 && !before) before = child;
-    });
-    if (before) container.insertBefore(dragged, before);
-    else container.appendChild(dragged);
-    saveBlockOrder();
+    if (moved) saveBlockOrder();
+    draggedEl = null;
+    dragging = false;
   });
 
   btn.addEventListener('click', function() {
