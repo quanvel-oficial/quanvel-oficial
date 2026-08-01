@@ -7,6 +7,10 @@
   hint.innerHTML = 'Arrastra cada bloque con el cursor para moverlo. Los cambios se publican automaticamente.';
   document.body.appendChild(hint);
 
+  var dropLine = document.createElement('div');
+  dropLine.className = 'block-drop-line';
+  document.body.appendChild(dropLine);
+
   function showToast(msg) {
     var t = document.getElementById('blocks-toast');
     t.textContent = msg;
@@ -96,25 +100,51 @@
   document.addEventListener('dragend', function(e) {
     var el = document.querySelector('.dragging');
     if (el) el.classList.remove('dragging');
+    dropLine.classList.remove('show');
   });
 
   document.addEventListener('dragover', function(e) {
     if (!editMode) return;
-    var el = e.target.closest('[data-block]');
-    if (el) e.preventDefault();
+    var container = e.target.closest('[data-block-container]');
+    if (!container) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    var children = container.querySelectorAll(':scope > [data-block]');
+    var target = e.target.closest(':scope > [data-block]');
+    if (!target && e.target !== container && !container.contains(e.target)) return;
+    var before = null;
+    children.forEach(function(child) {
+      var r = child.getBoundingClientRect();
+      if (e.clientY < r.top + r.height / 2) {
+        if (!before) before = child;
+      }
+    });
+    if (before) {
+      dropLine.classList.add('show');
+      dropLine.style.top = (before.getBoundingClientRect().top - 4) + 'px';
+    } else if (children.length) {
+      dropLine.classList.add('show');
+      dropLine.style.top = (children[children.length - 1].getBoundingClientRect().bottom + 4) + 'px';
+    }
   });
 
   document.addEventListener('drop', function(e) {
     if (!editMode) return;
     e.preventDefault();
-    var target = e.target.closest('[data-block]');
+    var container = e.target.closest('[data-block-container]');
     var dragged = document.querySelector('.dragging');
-    if (!target || !dragged) return;
-    if (target.parentElement !== dragged.parentElement) return;
-    var rect = target.getBoundingClientRect();
-    var after = e.clientY > rect.top + rect.height / 2;
-    if (after) target.after(dragged);
-    else target.before(dragged);
+    if (!container || !dragged) return;
+    if (!container.contains(dragged)) return;
+    dropLine.classList.remove('show');
+    var children = Array.prototype.slice.call(container.querySelectorAll(':scope > [data-block]'));
+    children = children.filter(function(c) { return c !== dragged; });
+    var before = null;
+    children.forEach(function(child) {
+      var r = child.getBoundingClientRect();
+      if (e.clientY < r.top + r.height / 2 && !before) before = child;
+    });
+    if (before) container.insertBefore(dragged, before);
+    else container.appendChild(dragged);
     saveBlockOrder();
   });
 
