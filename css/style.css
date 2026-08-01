@@ -241,6 +241,11 @@ body:not(.edit-mode) [data-block].moved {
   overflow: hidden;
 }
 
+body.edit-mode [data-block] {
+  touch-action: none;
+  user-select: none;
+}
+
 body.edit-mode [data-block]::before {
   content: '\2630';
   position: absolute;
@@ -261,6 +266,64 @@ body.edit-mode .section-title {
   border: 2px dashed rgba(167, 139, 250, 0.6);
   border-radius: 12px;
   padding: 4px 8px;
+}
+
+.blocks-toolbar {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 16, 0.92);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 14px;
+  padding: 8px 10px;
+  gap: 8px;
+  z-index: 250;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.blocks-toolbar button {
+  background: #15151f;
+  border: 1px solid #2a2a3a;
+  color: #e9e9f2;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.blocks-toolbar button:hover {
+  border-color: #a78bfa;
+  background: #1e1e2e;
+}
+
+.blocks-toolbar #close-edit-btn {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: none;
+}
+
+.blocks-toolbar #close-edit-btn:hover {
+  filter: brightness(1.15);
+}
+
+.block-ghost-label {
+  position: fixed;
+  z-index: 998;
+  pointer-events: none;
+  background: rgba(10, 10, 16, 0.95);
+  border: 1px solid #ec4899;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .blocks-hint {
