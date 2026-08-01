@@ -157,5 +157,11 @@
       "footer-links-4"
     ]
   },
-  "custom-css": ""
+  "custom-css": "",
+  "block-pos": {
+    "hero-badge": {
+      "x": -264.738,
+      "y": -108
+    }
+  }
 }
