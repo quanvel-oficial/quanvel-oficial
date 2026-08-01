@@ -200,8 +200,20 @@ body.edit-mode [data-block]:hover {
 }
 
 body.edit-mode [data-block].dragging {
-  opacity: 0.5;
+  opacity: 0.35;
   border-color: #ec4899;
+}
+
+.block-ghost {
+  position: fixed;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.9;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  border: 2px solid #ec4899 !important;
+  border-radius: 12px;
+  background: var(--bg-card);
+  overflow: hidden;
 }
 
 body.edit-mode [data-block]::before {
