@@ -2,6 +2,10 @@
   var BLOCK_ORDER_KEY = 'quanvely-block-order';
   var editMode = false;
   var btn = document.getElementById('edit-blocks-btn');
+  var hint = document.createElement('div');
+  hint.className = 'blocks-hint';
+  hint.innerHTML = 'Arrastra cada bloque con el cursor para moverlo. Los cambios se publican automaticamente.';
+  document.body.appendChild(hint);
 
   function showToast(msg) {
     var t = document.getElementById('blocks-toast');
@@ -13,6 +17,7 @@
   function setEditMode(on) {
     editMode = on;
     document.body.classList.toggle('edit-mode', on);
+    hint.style.display = on ? 'block' : 'none';
     btn.classList.toggle('active', on);
     btn.innerHTML = on ? '&#10005;' : '&#9776;';
     document.querySelectorAll('[data-block]').forEach(function(el) {
@@ -116,4 +121,11 @@
   btn.addEventListener('click', function() {
     setEditMode(!editMode);
   });
+
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('edit') === '1' || params.get('edit') === 'true') {
+    setEditMode(true);
+  } else {
+    hint.style.display = 'none';
+  }
 })();
