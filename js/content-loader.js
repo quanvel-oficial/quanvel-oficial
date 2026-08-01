@@ -119,6 +119,18 @@
         });
       });
     }
+
+    if (saved['block-pos']) {
+      Object.keys(saved['block-pos']).forEach(function(blockId) {
+        var el = document.querySelector('[data-block="' + blockId + '"]');
+        if (!el) return;
+        var p = saved['block-pos'][blockId];
+        if (p && p.x !== undefined && p.y !== undefined) {
+          el.style.transform = 'translate(' + p.x + 'px, ' + p.y + 'px)';
+          el.classList.add('moved');
+        }
+      });
+    }
   }
 
   function esc(str) {
