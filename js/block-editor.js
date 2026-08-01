@@ -28,9 +28,11 @@
   function setEditMode(on) {
     editMode = on;
     document.body.classList.toggle('edit-mode', on);
-    hint.style.display = on ? 'block' : 'none';
-    btn.classList.toggle('active', on);
-    btn.innerHTML = on ? '&#10005;' : '&#9776;';
+    if (hint) hint.style.display = on ? 'block' : 'none';
+    if (btn) {
+      btn.classList.toggle('active', on);
+      btn.innerHTML = on ? '&#10005;' : '&#9776;';
+    }
   }
 
   function collectOrder() {
@@ -174,14 +176,16 @@
     dragging = false;
   });
 
-  btn.addEventListener('click', function() {
-    setEditMode(!editMode);
-  });
+  if (btn) {
+    btn.addEventListener('click', function() {
+      setEditMode(!editMode);
+    });
+  }
 
   var params = new URLSearchParams(window.location.search);
   if (params.get('edit') === '1' || params.get('edit') === 'true') {
     setEditMode(true);
-  } else {
+  } else if (hint) {
     hint.style.display = 'none';
   }
 })();
