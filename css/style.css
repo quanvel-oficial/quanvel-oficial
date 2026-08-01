@@ -204,6 +204,31 @@ body.edit-mode [data-block].dragging {
   border-color: #ec4899;
 }
 
+body.edit-mode [data-block].moved::after {
+  content: 'MOVIDO';
+  position: absolute;
+  top: -12px;
+  right: 8px;
+  background: #ec4899;
+  color: white;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  z-index: 5;
+  line-height: 1.4;
+}
+
+body.edit-mode [data-block].moved {
+  z-index: 30;
+  cursor: move;
+}
+
+body:not(.edit-mode) [data-block].moved {
+  z-index: 2;
+}
+
 .block-ghost {
   position: fixed;
   z-index: 999;
@@ -236,23 +261,6 @@ body.edit-mode .section-title {
   border: 2px dashed rgba(167, 139, 250, 0.6);
   border-radius: 12px;
   padding: 4px 8px;
-}
-
-.block-drop-line {
-  display: none;
-  position: fixed;
-  left: 8px;
-  right: 8px;
-  height: 4px;
-  background: #ec4899;
-  border-radius: 4px;
-  box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
-  z-index: 199;
-  pointer-events: none;
-}
-
-.block-drop-line.show {
-  display: block;
 }
 
 .blocks-hint {
