@@ -108,6 +108,17 @@
         if (el) document.body.appendChild(el);
       });
     }
+
+    if (saved['block-order']) {
+      Object.keys(saved['block-order']).forEach(function(containerId) {
+        var container = document.querySelector('[data-block-container="' + containerId + '"]');
+        if (!container) return;
+        saved['block-order'][containerId].forEach(function(blockId) {
+          var el = container.querySelector(':scope > [data-block="' + blockId + '"]');
+          if (el) container.appendChild(el);
+        });
+      });
+    }
   }
 
   function esc(str) {
