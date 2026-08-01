@@ -126,8 +126,8 @@
   "custom-css": "",
   "block-order": {
     "hero": [
-      "hero-badge",
       "hero-title",
+      "hero-badge",
       "hero-desc",
       "hero-stats",
       "hero-buttons"
