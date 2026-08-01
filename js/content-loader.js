@@ -145,6 +145,20 @@
     if (saved) applyContent(saved);
   } catch(e) {}
 
+  try {
+    var localPos = JSON.parse(localStorage.getItem('quanvely-block-pos'));
+    if (localPos && Object.keys(localPos).length) {
+      applyContent({ 'block-pos': localPos });
+    }
+  } catch(e) {}
+
+  try {
+    var localOrder = JSON.parse(localStorage.getItem('quanvely-block-order'));
+    if (localOrder && Object.keys(localOrder).length) {
+      applyContent({ 'block-order': localOrder });
+    }
+  } catch(e) {}
+
   fetch('https://api.github.com/repos/quanvel-oficial/quanvel-oficial/contents/content.json?_=' + Date.now())
     .then(function(r) {
       if (!r.ok) throw new Error('No disponible');
