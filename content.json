@@ -123,5 +123,29 @@
   "style-font-size-text": "16",
   "style-hero-align": "left",
   "style-logo-pos": "left",
-  "custom-css": ""
+  "custom-css": "",
+  "block-order": {
+    "hero": [
+      "hero-badge",
+      "hero-title",
+      "hero-desc",
+      "hero-buttons",
+      "hero-stats"
+    ],
+    "about": [
+      "about-text",
+      "about-visual"
+    ],
+    "contact": [
+      "contact-form",
+      "contact-info"
+    ],
+    "footer": [
+      "footer-brand",
+      "footer-links-1",
+      "footer-links-2",
+      "footer-links-3",
+      "footer-links-4"
+    ]
+  }
 }
