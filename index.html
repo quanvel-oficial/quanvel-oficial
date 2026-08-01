@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <title data-key="site-title">Quanvely - Software que impulsa tu negocio</title>
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -36,18 +36,18 @@
       <div class="glow glow-2"></div>
       <div class="glow glow-3"></div>
     </div>
-    <div class="container hero-content">
-      <p class="hero-badge">
+    <div class="container hero-content" data-block-container="hero">
+      <p class="hero-badge" data-block="hero-badge">
         <span class="hero-badge-dot"></span>
         <span data-key="hero-badge">Software de nueva generacion</span>
       </p>
-      <h1 data-key="hero-title">Construimos el <span class="gradient-text">futuro digital</span> de tu empresa</h1>
-      <p class="hero-desc" data-key="hero-desc">En Quanvely creamos soluciones de software a medida, plataformas escalables y productos digitales que transforman negocios.</p>
-      <div class="hero-buttons">
+      <h1 data-key="hero-title" data-block="hero-title">Construimos el <span class="gradient-text">futuro digital</span> de tu empresa</h1>
+      <p class="hero-desc" data-key="hero-desc" data-block="hero-desc">En Quanvely creamos soluciones de software a medida, plataformas escalables y productos digitales que transforman negocios.</p>
+      <div class="hero-buttons" data-block="hero-buttons">
         <a href="#contacto" class="btn btn-primary"><span data-key="hero-btn1">Comenzar proyecto &rarr;</span></a>
         <a href="#servicios" class="btn btn-outline"><span data-key="hero-btn2">Ver servicios</span></a>
       </div>
-      <div class="hero-stats">
+      <div class="hero-stats" data-block="hero-stats">
         <div class="stat">
           <span class="stat-number" data-key="hero-projects" data-target="50">0</span><span class="stat-suffix">+</span>
           <span class="stat-label" data-key="stat-label-projects">Proyectos entregados</span>
@@ -122,8 +122,8 @@
   </section>
 
   <section class="about" id="sobre-nosotros" data-section="about">
-    <div class="container about-grid">
-      <div class="about-text">
+    <div class="container about-grid" data-block-container="about">
+      <div class="about-text" data-block="about-text">
         <p class="section-tag" data-key="about-tag">Sobre nosotros</p>
         <h2 class="section-title" data-key="about-title">Un equipo apasionado por el <span class="gradient-text">codigo limpio</span></h2>
         <p data-key="about-text">Somos un equipo de ingenieros, disenadores y estrategas que creen en el poder del software para transformar negocios. En Quanvely no solo escribimos codigo: construimos productos que marcan la diferencia.</p>
@@ -151,7 +151,7 @@
           </div>
         </div>
       </div>
-      <div class="about-visual fade-in-right">
+      <div class="about-visual fade-in-right" data-block="about-visual">
         <div class="code-block">
           <div class="code-header">
             <span class="dot red"></span>
@@ -265,8 +265,8 @@
     <div class="container">
       <p class="section-tag" data-key="contact-tag">Contacto</p>
       <h2 class="section-title" data-key="contact-title">Hablemos de tu <span class="gradient-text">proximo proyecto</span></h2>
-      <div class="contact-grid">
-        <form class="contact-form fade-in" id="contact-form">
+      <div class="contact-grid" data-block-container="contact">
+        <form class="contact-form fade-in" id="contact-form" data-block="contact-form">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Nombre</label>
@@ -295,7 +295,7 @@
           </div>
           <button type="submit" class="btn btn-primary btn-full"><span data-key="contact-submit">Enviar mensaje</span></button>
         </form>
-        <div class="contact-info">
+        <div class="contact-info" data-block="contact-info">
           <div class="info-card fade-in-right">
             <span class="info-icon">&#128231;</span>
             <h4>Email</h4>
@@ -317,12 +317,12 @@
   </section>
 
   <footer class="footer" data-section="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
+    <div class="container footer-grid" data-block-container="footer">
+      <div class="footer-brand" data-block="footer-brand">
         <a href="#" class="logo"><span class="logo-icon"><img src="assets/logo.svg" alt="Quanvely"></span> <span data-key="site-logo-text">Quanvely</span></a>
         <p data-key="footer-text">Construyendo el futuro digital, una linea de codigo a la vez.</p>
       </div>
-      <div class="footer-links">
+      <div class="footer-links" data-block="footer-links-1">
         <h4 data-key="footer-col1-title">Servicios</h4>
         <ul>
           <li><a href="#servicios">Desarrollo Web</a></li>
@@ -331,7 +331,7 @@
           <li><a href="#servicios">IA & Machine Learning</a></li>
         </ul>
       </div>
-      <div class="footer-links">
+      <div class="footer-links" data-block="footer-links-2">
         <h4 data-key="footer-col2-title">Empresa</h4>
         <ul>
           <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
@@ -340,13 +340,13 @@
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
-      <div class="footer-links">
+      <div class="footer-links" data-block="footer-links-3">
         <h4 data-key="footer-col3-title">Siguenos</h4>
         <ul>
           <li><a href="https://quanvel-oficial.github.io/quanvel-oficial" target="_blank" rel="noopener noreferrer">Quanvely</a></li>
         </ul>
       </div>
-      <div class="footer-links">
+      <div class="footer-links" data-block="footer-links-4">
         <h4>Acceso</h4>
         <ul>
           <li><a href="admin/index.html" target="_blank">Modo Admin</a></li>
@@ -358,9 +358,12 @@
     </div>
   </footer>
 
-  <script src="js/content-loader.js?v=8"></script>
-  <script src="js/main.js?v=8"></script>
+  <script src="js/content-loader.js?v=9"></script>
+  <script src="js/main.js?v=9"></script>
+  <script src="js/block-editor.js?v=1"></script>
 
+  <button id="edit-blocks-btn" class="floating-edit floating-blocks" title="Mover bloques (modo edicion)">&#9776;</button>
+  <div id="blocks-toast" class="blocks-toast">Orden guardado</div>
   <a href="admin/index.html" class="floating-edit" title="Editar esta pagina">&#9998;</a>
 </body>
 </html>
