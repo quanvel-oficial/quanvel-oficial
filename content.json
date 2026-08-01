@@ -123,14 +123,23 @@
   "style-font-size-text": "16",
   "style-hero-align": "left",
   "style-logo-pos": "left",
-  "custom-css": "",
+  "page-sections": [
+    "hero",
+    "services",
+    "about",
+    "portfolio",
+    "testimonials",
+    "cta",
+    "contact",
+    "footer"
+  ],
   "block-order": {
     "hero": [
-      "hero-title",
       "hero-badge",
+      "hero-title",
       "hero-desc",
-      "hero-stats",
-      "hero-buttons"
+      "hero-buttons",
+      "hero-stats"
     ],
     "about": [
       "about-text",
@@ -148,26 +157,5 @@
       "footer-links-4"
     ]
   },
-  "block-pos": {
-    "hero-title": {
-      "x": -302,
-      "y": -5
-    },
-    "hero-badge": {
-      "x": -268,
-      "y": -147
-    },
-    "hero-desc": {
-      "x": -291,
-      "y": -77
-    },
-    "hero-stats": {
-      "x": -111,
-      "y": -61
-    },
-    "hero-buttons": {
-      "x": -116,
-      "y": -21
-    }
-  }
+  "custom-css": ""
 }
