@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Quanvely</title>
-  <link rel="stylesheet" href="admin.css?v=3">
+  <link rel="stylesheet" href="admin.css?v=4">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -39,6 +39,7 @@
         <button class="nav-btn" data-tab="contact">Contacto</button>
         <button class="nav-btn" data-tab="footer">Footer</button>
         <button class="nav-btn" data-tab="styles">Estilos</button>
+        <button class="nav-btn" data-tab="blocks">Bloques</button>
       </nav>
       <div class="sidebar-footer">
         <a href="../index.html" target="_blank" class="preview-link">&#128065; Modo lectura &rarr;</a>
@@ -436,11 +437,20 @@
           </div>
         </div>
 
+        <!-- BLOQUES -->
+        <div id="tab-blocks" class="tab-content">
+          <div class="card">
+            <h3>Bloques de cada seccion</h3>
+            <small style="display:block;margin-bottom:16px;color:#8a7ba8;">Arrastra cada bloque para cambiar su posicion dentro de la seccion. Guarda para publicar.</small>
+            <div id="blocks-manager"></div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
 
   <div id="toast" class="toast">Cambios guardados</div>
-  <script src="admin.js?v=7"></script>
+  <script src="admin.js?v=8"></script>
 </body>
 </html>
