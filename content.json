@@ -147,5 +147,11 @@
       "footer-links-3",
       "footer-links-4"
     ]
+  },
+  "block-pos": {
+    "hero-title": {
+      "x": -175,
+      "y": -63
+    }
   }
 }
