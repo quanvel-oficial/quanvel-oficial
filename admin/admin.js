@@ -89,6 +89,12 @@ const DEFAULT_CONTENT = {
   'style-hero-align': 'left',
   'style-logo-pos': 'left',
   'page-sections': ['hero', 'services', 'about', 'portfolio', 'testimonials', 'cta', 'contact', 'footer'],
+  'block-order': {
+    hero: ['hero-badge', 'hero-title', 'hero-desc', 'hero-buttons', 'hero-stats'],
+    about: ['about-text', 'about-visual'],
+    contact: ['contact-form', 'contact-info'],
+    footer: ['footer-brand', 'footer-links-1', 'footer-links-2', 'footer-links-3', 'footer-links-4']
+  },
   'custom-css': ''
 };
 
@@ -294,6 +300,64 @@ function moveSection(i, dir) {
   renderSections();
 }
 
+const BLOCK_NAMES = {
+  hero: {
+    'hero-badge': 'Badge (texto con punto verde)',
+    'hero-title': 'Titulo principal',
+    'hero-desc': 'Parrafo de descripcion',
+    'hero-buttons': 'Botones',
+    'hero-stats': 'Estadisticas (numeros)'
+  },
+  about: {
+    'about-text': 'Texto e informacion',
+    'about-visual': 'Grafico (bloque de codigo)'
+  },
+  contact: {
+    'contact-form': 'Formulario',
+    'contact-info': 'Informacion de contacto'
+  },
+  footer: {
+    'footer-brand': 'Marca y descripcion',
+    'footer-links-1': 'Columna Servicios',
+    'footer-links-2': 'Columna Empresa',
+    'footer-links-3': 'Columna Siguenos',
+    'footer-links-4': 'Columna Acceso'
+  }
+};
+
+function renderBlocks() {
+  const container = document.getElementById('blocks-manager');
+  if (!container) return;
+  const containers = [
+    { id: 'hero', title: 'Inicio (hero)' },
+    { id: 'about', title: 'Sobre nosotros' },
+    { id: 'contact', title: 'Contacto' },
+    { id: 'footer', title: 'Footer' }
+  ];
+  container.innerHTML = '';
+  containers.forEach(c => {
+    const wrap = document.createElement('div');
+    wrap.className = 'block-group';
+    const title = document.createElement('h4');
+    title.textContent = c.title;
+    wrap.appendChild(title);
+    const list = document.createElement('div');
+    list.className = 'block-list';
+    list.setAttribute('data-block-container', c.id);
+    const blocks = (content['block-order'] && content['block-order'][c.id]) || [];
+    blocks.forEach(b => {
+      const item = document.createElement('div');
+      item.className = 'block-chip';
+      item.setAttribute('draggable', 'true');
+      item.setAttribute('data-block-id', b);
+      item.innerHTML = '<span class="block-grip">&#9776;</span><span>' + ((BLOCK_NAMES[c.id] && BLOCK_NAMES[c.id][b]) || b) + '</span>';
+      list.appendChild(item);
+    });
+    wrap.appendChild(list);
+    container.appendChild(wrap);
+  });
+}
+
 function escHtml(str) {
   if (typeof str !== 'string') return '';
   const d = document.createElement('div');
@@ -333,6 +397,7 @@ function loadFields() {
   renderPortfolio();
   renderTestimonials();
   renderSections();
+  renderBlocks();
 }
 
 function collectFields() {
@@ -477,7 +542,8 @@ function switchTab(tabId) {
     cta: 'CTA',
     contact: 'Contacto',
     footer: 'Footer',
-    styles: 'Estilos'
+    styles: 'Estilos',
+    blocks: 'Bloques'
   };
   document.getElementById('tab-title').textContent = titles[tabId] || tabId;
 }
@@ -521,5 +587,44 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       handleSave();
     }
+  });
+
+  let dragBlock = null;
+  document.addEventListener('dragstart', (e) => {
+    const chip = e.target.closest('.block-chip');
+    if (chip) {
+      dragBlock = chip;
+      chip.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+  });
+
+  document.addEventListener('dragend', () => {
+    if (dragBlock) {
+      dragBlock.classList.remove('dragging');
+      dragBlock = null;
+    }
+  });
+
+  document.addEventListener('dragover', (e) => {
+    const chip = e.target.closest('.block-chip');
+    if (chip) e.preventDefault();
+  });
+
+  document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const chip = e.target.closest('.block-chip');
+    if (!chip || !dragBlock || chip === dragBlock) return;
+    if (chip.parentElement !== dragBlock.parentElement) return;
+    const rect = chip.getBoundingClientRect();
+    if (e.clientY > rect.top + rect.height / 2) chip.after(dragBlock);
+    else chip.before(dragBlock);
+    const list = chip.parentElement;
+    const containerId = list.getAttribute('data-block-container');
+    const newOrder = [];
+    list.querySelectorAll('.block-chip').forEach(c => newOrder.push(c.getAttribute('data-block-id')));
+    if (content['block-order']) content['block-order'][containerId] = newOrder;
+    renderBlocks();
+    showToast('Orden actualizado. Recuerda guardar para publicar');
   });
 });
