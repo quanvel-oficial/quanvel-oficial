@@ -226,6 +226,23 @@ body.edit-mode .section-title {
   padding: 4px 8px;
 }
 
+.block-drop-line {
+  display: none;
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  height: 4px;
+  background: #ec4899;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.8);
+  z-index: 199;
+  pointer-events: none;
+}
+
+.block-drop-line.show {
+  display: block;
+}
+
 .blocks-hint {
   display: none;
   position: fixed;
