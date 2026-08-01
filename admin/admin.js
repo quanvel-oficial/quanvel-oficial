@@ -543,9 +543,15 @@ function switchTab(tabId) {
     contact: 'Contacto',
     footer: 'Footer',
     styles: 'Estilos',
-    blocks: 'Bloques'
+    blocks: 'Bloques',
+    preview: 'Vista previa'
   };
   document.getElementById('tab-title').textContent = titles[tabId] || tabId;
+
+  if (tabId === 'preview') {
+    const frame = document.getElementById('preview-frame');
+    if (frame) frame.src = '../index.html?edit=1&_=' + Date.now();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
