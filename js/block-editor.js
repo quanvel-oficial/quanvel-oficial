@@ -1,25 +1,26 @@
 (function() {
   var BLOCK_ORDER_KEY = 'quanvely-block-order';
+  var BLOCK_POS_KEY = 'quanvely-block-pos';
   var editMode = false;
   var btn = document.getElementById('edit-blocks-btn');
   var hint = document.createElement('div');
   hint.className = 'blocks-hint';
-  hint.innerHTML = 'Arrastra cada bloque con el cursor para moverlo. Los cambios se publican automaticamente.';
+  hint.innerHTML = 'Arrastra cada bloque en cualquier direccion. Doble clic quita la posicion.';
   document.body.appendChild(hint);
-
-  var dropLine = document.createElement('div');
-  dropLine.className = 'block-drop-line';
-  document.body.appendChild(dropLine);
 
   var ghost = null;
   var draggedEl = null;
-  var startY = 0;
   var startX = 0;
-  var offsetY = 0;
+  var startY = 0;
+  var grabDX = 0;
+  var grabDY = 0;
+  var baseX = 0;
+  var baseY = 0;
   var dragging = false;
 
   function showToast(msg) {
     var t = document.getElementById('blocks-toast');
+    if (!t) return;
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(function() { t.classList.remove('show'); }, 2200);
@@ -35,6 +36,13 @@
     }
   }
 
+  function parseTransform(el) {
+    var t = el.style.transform || '';
+    var m = t.match(/translate\(\s*(-?[\d.]+)px\s*,\s*(-?[\d.]+)px\s*\)/);
+    if (m) return { x: parseFloat(m[1]), y: parseFloat(m[2]) };
+    return { x: 0, y: 0 };
+  }
+
   function collectOrder() {
     var order = {};
     document.querySelectorAll('[data-block-container]').forEach(function(container) {
@@ -47,14 +55,32 @@
     return order;
   }
 
-  function publishOrder(order) {
+  function collectPos() {
+    var pos = {};
+    document.querySelectorAll('[data-block]').forEach(function(el) {
+      var t = parseTransform(el);
+      if (t.x !== 0 || t.y !== 0) {
+        pos[el.getAttribute('data-block')] = t;
+      }
+    });
+    return pos;
+  }
+
+  function fetchContent() {
+    return fetch('https://api.github.com/repos/quanvel-oficial/quanvel-oficial/contents/content.json?_=' + Date.now())
+      .then(function(r) {
+        if (!r.ok) throw new Error('fetch');
+        return r.json();
+      });
+  }
+
+  function publishField(field, value, msg, okMsg) {
     var token = localStorage.getItem('quanvely-github-token');
     if (!token) {
-      showToast('Orden guardado. Falta el token para publicar (agregalo en el admin)');
+      showToast('Guardado local. Falta el token para publicar');
       return;
     }
-    fetch('https://api.github.com/repos/quanvel-oficial/quanvel-oficial/contents/content.json')
-      .then(function(r) { return r.json(); })
+    fetchContent()
       .then(function(data) {
         var content;
         try {
@@ -62,15 +88,9 @@
         } catch (e) {
           content = {};
         }
-        content['block-order'] = order;
-        var jsonContent = JSON.stringify(content, null, 2);
-        var encoded = btoa(unescape(encodeURIComponent(jsonContent)));
-        var body = {
-          message: 'Actualizar orden de bloques',
-          content: encoded,
-          sha: data.sha,
-          branch: 'main'
-        };
+        content[field] = value;
+        var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+        var body = { message: msg, content: encoded, sha: data.sha, branch: 'main' };
         return fetch('https://api.github.com/repos/quanvel-oficial/quanvel-oficial/contents/content.json', {
           method: 'PUT',
           headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
@@ -79,101 +99,89 @@
       })
       .then(function(r) {
         if (!r || !r.ok) throw new Error('publicar');
-        localStorage.setItem(BLOCK_ORDER_KEY, JSON.stringify(order));
-        showToast('Orden guardado y publicado');
+        showToast(okMsg || 'Publicado');
       })
       .catch(function() {
-        localStorage.setItem(BLOCK_ORDER_KEY, JSON.stringify(order));
-        showToast('Orden guardado localmente');
+        showToast('Guardado localmente');
       });
   }
 
   function saveBlockOrder() {
     var order = collectOrder();
     localStorage.setItem(BLOCK_ORDER_KEY, JSON.stringify(order));
-    publishOrder(order);
+    publishField('block-order', order, 'Actualizar orden de bloques', 'Orden guardado y publicado');
   }
 
-  function getInsertionPoint(container, clientY) {
-    var children = Array.prototype.slice.call(container.querySelectorAll(':scope > [data-block]')).filter(function(c) { return c !== draggedEl; });
-    var before = null;
-    children.forEach(function(child) {
-      var r = child.getBoundingClientRect();
-      if (clientY < r.top + r.height / 2 && !before) before = child;
-    });
-    return before;
-  }
-
-  function updateDropLine(container, clientY) {
-    var before = getInsertionPoint(container, clientY);
-    var children = Array.prototype.slice.call(container.querySelectorAll(':scope > [data-block]')).filter(function(c) { return c !== draggedEl; });
-    if (before) {
-      dropLine.classList.add('show');
-      dropLine.style.top = (before.getBoundingClientRect().top - 4) + 'px';
-    } else if (children.length) {
-      dropLine.classList.add('show');
-      dropLine.style.top = (children[children.length - 1].getBoundingClientRect().bottom + 4) + 'px';
-    } else {
-      dropLine.classList.remove('show');
-    }
+  function saveBlockPos() {
+    var pos = collectPos();
+    localStorage.setItem(BLOCK_POS_KEY, JSON.stringify(pos));
+    publishField('block-pos', pos, 'Actualizar posicion de bloques', 'Posicion guardada y publicada');
   }
 
   document.addEventListener('mousedown', function(e) {
     if (!editMode || e.button !== 0) return;
-    if (e.target.closest('#edit-blocks-btn')) return;
+    if (e.target.closest('#edit-blocks-btn') || e.target.closest('.floating-edit')) return;
     var el = e.target.closest('[data-block]');
     if (!el) return;
+    e.preventDefault();
     draggedEl = el;
-    startY = e.clientY;
     startX = e.clientX;
+    startY = e.clientY;
+    var rect = el.getBoundingClientRect();
+    grabDX = e.clientX - rect.left;
+    grabDY = e.clientY - rect.top;
+    var base = parseTransform(el);
+    baseX = base.x;
+    baseY = base.y;
     dragging = false;
   });
 
   document.addEventListener('mousemove', function(e) {
     if (!draggedEl) return;
     if (!dragging) {
-      if (Math.abs(e.clientY - startY) < 6 && Math.abs(e.clientX - startX) < 6) return;
+      if (Math.abs(e.clientX - startX) < 6 && Math.abs(e.clientY - startY) < 6) return;
       dragging = true;
       ghost = draggedEl.cloneNode(true);
       ghost.classList.add('block-ghost');
       var rect = draggedEl.getBoundingClientRect();
-      offsetY = e.clientY - rect.top;
       ghost.style.width = rect.width + 'px';
+      ghost.style.height = rect.height + 'px';
       document.body.appendChild(ghost);
       draggedEl.classList.add('dragging');
+      draggedEl.classList.add('moved');
     }
-    ghost.style.left = (e.clientX - ghost.getBoundingClientRect().width / 2) + 'px';
-    ghost.style.top = (e.clientY - offsetY) + 'px';
-    var elUnder = document.elementFromPoint(e.clientX, e.clientY);
-    var container = elUnder ? elUnder.closest('[data-block-container]') : null;
-    if (container && container.contains(draggedEl)) {
-      dropLine.classList.add('active');
-      updateDropLine(container, e.clientY);
-    } else {
-      dropLine.classList.remove('show');
-    }
+    var newLeft = e.clientX - grabDX;
+    var newTop = e.clientY - grabDY;
+    ghost.style.left = newLeft + 'px';
+    ghost.style.top = newTop + 'px';
   });
 
   document.addEventListener('mouseup', function(e) {
     if (!draggedEl) return;
-    var elUnder = document.elementFromPoint(e.clientX, e.clientY);
-    var container = elUnder ? elUnder.closest('[data-block-container]') : null;
-    var moved = false;
-    if (container && container.contains(draggedEl)) {
-      var before = getInsertionPoint(container, e.clientY);
-      if (before) container.insertBefore(draggedEl, before);
-      else container.appendChild(draggedEl);
-      moved = true;
-    }
-    if (ghost) {
+    if (dragging && ghost) {
+      var newLeft = e.clientX - grabDX;
+      var newTop = e.clientY - grabDY;
+      var rect = draggedEl.getBoundingClientRect();
+      var dx = baseX + (newLeft - rect.left);
+      var dy = baseY + (newTop - rect.top);
+      draggedEl.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
       ghost.parentNode.removeChild(ghost);
       ghost = null;
+      draggedEl.classList.remove('dragging');
+      saveBlockPos();
     }
-    draggedEl.classList.remove('dragging');
-    dropLine.classList.remove('show');
-    if (moved) saveBlockOrder();
     draggedEl = null;
     dragging = false;
+  });
+
+  document.addEventListener('dblclick', function(e) {
+    if (!editMode) return;
+    var el = e.target.closest('[data-block]');
+    if (!el) return;
+    el.style.transform = '';
+    el.classList.remove('moved');
+    saveBlockPos();
+    showToast('Posicion restablecida');
   });
 
   if (btn) {
