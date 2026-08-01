@@ -126,11 +126,11 @@
   "custom-css": "",
   "block-order": {
     "hero": [
-      "hero-title",
       "hero-badge",
+      "hero-title",
       "hero-desc",
-      "hero-buttons",
-      "hero-stats"
+      "hero-stats",
+      "hero-buttons"
     ],
     "about": [
       "about-text",
