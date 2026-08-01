@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Quanvely</title>
-  <link rel="stylesheet" href="admin.css?v=4">
+  <link rel="stylesheet" href="admin.css?v=5">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,6 +30,7 @@
       </div>
       <nav class="sidebar-nav">
         <button class="nav-btn active" data-tab="general">General</button>
+        <button class="nav-btn" data-tab="preview">Vista previa</button>
         <button class="nav-btn" data-tab="hero">Inicio</button>
         <button class="nav-btn" data-tab="services">Servicios</button>
         <button class="nav-btn" data-tab="about">Sobre nosotros</button>
@@ -102,6 +103,11 @@
               <small>Crea tu token en GitHub: Settings > Developer settings > Personal access tokens > Tokens (classic). Marca "repo".</small>
             </div>
           </div>
+        </div>
+
+        <!-- VISTA PREVIA -->
+        <div id="tab-preview" class="tab-content preview-tab">
+          <iframe id="preview-frame" src="../index.html?edit=1" title="Vista previa de la pagina"></iframe>
         </div>
 
         <!-- HERO -->
@@ -451,6 +457,6 @@
   </div>
 
   <div id="toast" class="toast">Cambios guardados</div>
-  <script src="admin.js?v=8"></script>
+  <script src="admin.js?v=9"></script>
 </body>
 </html>
